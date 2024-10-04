@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        button {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Add a new task..." />
+    <button onclick="add()">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        function add() {
+            let input = document.getElementById("taskInput");
+            let text = input.value.trim();
+            if (text=== "") {
+                alert("Please enter a task.");
+                return;
+            }
+            let list= document.createElement("li");
+            let span= document.createElement("span");
+            span.textContent = text;
+            let deletebtn= document.createElement("button");
+            deletebtn.textContent="Delete";
+            deletebtn.onclick = function () {
+                list.remove();
+            };
+
+            let update=document.createElement("button");
+            update.textContent = "Edit";
+            update.onclick = function () {
+                let newTask = prompt("Update the task:", span.textContent);
+                if (newTask !== null && newTask.trim() !== "") {
+                    span.textContent = newTask;
+                }
+            };
+            list.appendChild(span);
+            list.appendChild(update);
+            list.appendChild(deletebtn);
+            document.getElementById("taskList").appendChild(list);
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
